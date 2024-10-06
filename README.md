@@ -1,6 +1,6 @@
 # beamertemplate
 
-[MIT licensed](https://github.com/PaulTran47/beamertemplate/blob/master/LICENCE.md).
+[MIT licensed](https://github.com/PaulTran47/beamertemplate/blob/main/LICENCE.md).
 
 ---
 
