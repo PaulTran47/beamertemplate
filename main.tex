@@ -1,0 +1,282 @@
+%=================================================
+%% 2 percentage signs represent comments for code;
+% 1 percentage sign represents commented out code
+
+%% Beamer template for presentations
+%% Colour palette chosen with colour blindness in
+%% mind: https://davidmathlogic.com/colorblind/
+%% Paul L. Tran
+%% Last updated: 06 Oct, 2024.
+%=================================================
+
+%=================================================
+\documentclass[aspectratio = 1610, english, 11pt]{beamer}
+
+%% Used packages
+\usepackage{mathptmx}
+\usepackage{yhmath}
+\usepackage{amsfonts}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{makecell}
+\usepackage{adjustbox}
+\usepackage{varwidth}
+\usepackage{tabularx}
+\providecommand{\tabularnewline}{\\}
+\usepackage{centernot}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, matrix, chains, positioning, decorations.pathreplacing, decorations.pathmorphing, backgrounds, tikzmark}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{appendixnumberbeamer} 
+\usepackage[
+  sorting = ydnt,
+  citestyle = authoryear,
+  bibstyle = authoryear-comp,
+  defernumbers = true,
+  maxnames = 20,
+  giveninits = false,
+  bibencoding = utf8,
+  terseinits = true,
+  uniquename = init,
+  dashed = false,
+  doi = true,
+  isbn = false,
+  natbib = true,
+  backend = biber,
+  date = year
+]{biblatex}
+
+%% Setting base theme
+\usetheme{Frankfurt}
+
+%% Customising theme and alert colours according to IBM's design palette for colour blindness (https://davidmathlogic.com/colorblind/)
+\definecolor{basecolor}{RGB}{100, 143, 255} % HEX #648fff
+\colorlet{darkbasecolor}{basecolor!60!black} % Section header slightly darker
+\definecolor{alertcolor}{RGB}{220, 38, 127} % HEX #dc267f
+\setbeamercolor{alerted text}{fg = alertcolor}
+
+%% Assigning colours to the theme
+\usecolortheme[named = basecolor]{structure}
+\setbeamercolor{section in head/foot}{fg = white, bg = darkbasecolor}
+
+%% Setting title page style
+\setbeamertemplate{title page}[default][colsep = -4bp, shadow = false]
+
+%% Setting frame title style
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[sep = 0.2cm, ht = 1.8em, wd = \paperwidth, shadow = False]{frametitle}
+    %% Removing \insertframetitle from tikzpicture environment due to the latter causing issues with
+    %% \hfill in the frame titles
+    \insertframetitle
+    % \begin{tikzpicture}[overlay, remember picture]
+    %   \node[anchor = west, align = left] at (-0.2, 0.17){\insertframetitle};
+    % \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+%% Making option to widen slides
+\newcommand\Wider[2][3em]{%
+  \makebox[\linewidth][c]{%
+    \begin{minipage}{\dimexpr\textwidth+#1\relax}
+      \raggedright#2
+    \end{minipage}
+  }
+}
+
+%% Making spacing shortcuts if feeling lazy
+\newcommand{\bs}{\bigskip{}}
+\newcommand{\ms}{\medskip{}}
+
+%% Setting header style (with sections)
+\setbeamertemplate{headline}{
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip2pt\insertsectionnavigationhorizontal{\paperwidth}{}{}\vskip2pt
+  \end{beamercolorbox}
+}
+
+%% Setting footer style
+% To remove the navigation symbols from the bottom of slides
+\setbeamertemplate{navigation symbols}{} 
+%% Customising footer
+\setbeamertemplate{footline}{
+  \hbox{
+    \setbeamercolor{footercolor}{bg = white, fg = white!50!black}
+    \begin{beamercolorbox}[wd = 0.333333\paperwidth,ht = 2.25ex, dp = 2ex, left]{footercolor}%
+      \hspace*{2ex} \insertshortauthor\hspace*{0.5ex}  (\insertshortinstitute)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd = 0.333333\paperwidth,ht = 2.25ex, dp = 2ex, center]{footercolor}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd = 0.333333\paperwidth,ht = 2.25ex,dp = 2ex,right]{footercolor}%
+      \insertframenumber{}
+      % / \inserttotalframenumber %uncomment to add total slides
+      \hspace*{4ex} 
+    \end{beamercolorbox}
+  }
+  \vskip0pt
+}
+
+%% Setting bullet shapes
+%% Default bullet shapes are [default, circle, square]
+%% Using non-default shape. like a dash, require the format {--}
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}{--}
+\setbeamertemplate{section in toc}[circle]
+
+%% Setting footnote size
+\setbeamerfont{footnote}{size = \tiny}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+%% Setting covered items in slides to be transparent
+\setbeamercovered{transparent}
+
+%% Enabling numbered captions for tables and figures
+\setbeamertemplate{caption}[numbered]
+%=================================================
+
+%=================================================
+%% Creating title
+\newcommand\makebeamertitle{\frame{\maketitle}}
+\title[Short Title]{\textbf{Title}\\Subtitle}
+\author[Surname]{Name Surname\thanks{Email: \href{mailto:your@email.address}{your@email.address}. Website: \href{https://google.com/}{https://yourwebsite.com/}.}}
+\institute[Institution]{Institution} 
+\date{\today}
+%=================================================
+
+%=================================================
+%% Creating references
+\addbibresource{mybib.bib}
+%% Removing document icons from references
+\setbeamertemplate{bibliography item}{}
+%% Making URL the same font as text, not courier default
+\urlstyle{same}
+\newcommand{\doi}[1]{\url{#1}}
+\makeatletter
+\makeatother
+%=================================================
+
+%=================================================
+%% Creating slides
+\begin{document}
+  \section{Introduction}
+  \begin{frame}
+    \maketitle
+  \end{frame}
+
+  \begin{frame}{Introduction}
+    \begin{itemize}
+      \item Item
+      \vspace{2mm}
+      \begin{itemize}
+        \item Subitem
+        \vspace{2mm}
+        \begin{itemize}
+          \item Subsubitem
+        \end{itemize}
+      \end{itemize}
+      \vspace{3mm}
+      \item \alert{Highlighted item} \hyperlink{app}{\beamerbutton{Appendix}}\label{introduction}
+    \end{itemize}
+  \end{frame}
+
+  %% Creating ToC
+  \setbeamertemplate{section in toc}{
+    \leavevmode\leftskip = 2ex
+    \llap{
+      \usebeamerfont*{section number projected}
+      \usebeamercolor{section number projected}
+      \begin{pgfpicture}{-1ex}{0ex}{1ex}{2ex} % Section number in circle
+	 \color{bg}
+	 \pgfpathcircle{\pgfpoint{0pt}{.75ex}}{1.2ex}
+	 \pgfusepath{fill}
+	 \pgftext[base]{\color{fg}\inserttocsectionnumber}
+      \end{pgfpicture}\kern1.25ex
+    }
+    \underline{\inserttocsection}\par
+  }
+	
+  \AtBeginSection[]{
+    \begin{frame}[noframenumbering, plain]{Presentation Roadmap}
+      \tableofcontents[currentsection]
+    \end{frame}
+  }
+
+  \section{Section A}
+  \begin{frame}{Slide in Section A}
+    \begin{itemize}
+      \onslide<1>{\item Current item in $1^{st}$ slide}
+      \vspace{2mm}
+      \begin{itemize}
+        \uncover<2>{\item Current subitem in $2^{nd}$ slide}
+        \vspace{2mm}
+        \begin{itemize}
+          \uncover<3>{\item Current subsubitem in $3^{rd}$ slide}
+        \end{itemize}
+      \end{itemize}
+      \vspace{3mm}
+      \item[$\rightarrow$] Custom bullet point with citation: \alert{\citet{mycitation}}
+    \end{itemize}
+  \end{frame}
+
+  \section{Section B}
+  \begin{frame}{Slide in Section B}
+    \begin{itemize}
+      \item Click for \alert{\hyperlink{tab:1}{Table 1}}:
+    \end{itemize}
+    \vspace{1mm}
+    \begin{table}
+      \centering
+      \begin{tabular}{l|c}
+        & A\\
+        \hline
+        B & AB\\
+      \end{tabular}
+      \caption{Caption for Table 1}
+      \label{tab:1}
+    \end{table}
+  \end{frame}
+
+  \section{Conclusion}
+  \begin{frame}{Conclusion \& Next Steps}
+    \begin{itemize}
+      \item That's all
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}[noframenumbering]
+    \begin{center}
+      \Huge{\textcolor{basecolor}{Thank you!}}\\
+      \vspace{6mm}
+      \normalsize{
+        \href{mailto:your@email.address}{your@email.address}\\
+        \vspace{3mm}
+        \href{https://google.com/}{https://yourwebsite.com/}
+      }
+    \end{center}
+  \end{frame}
+
+  %% Creating references slides
+  %% Making references font size to be tiny
+  \renewcommand*{\bibfont}{\normalfont\tiny}
+  \begin{frame}[t, noframenumbering]{References} % add option allowframebreaks if long reference list
+	\printbibliography
+  \end{frame}
+
+  %% Additional slides that are linked
+  \begin{frame}{Appendix \hfill \hyperlink{introduction}{\beamerbutton{Back to Introduction}}}\label{app}
+  \end{frame}
+\end{document}
