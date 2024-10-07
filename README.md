@@ -12,8 +12,4 @@ The colour palette of the slides follow [IBM's Design Library palette for colour
 
 The references are also created using [Biblatex](https://ctan.org/pkg/biblatex) integration.
 
-<p align="right">
-  (<a href="#beamertemplate">back to top.</a>)
-</p>
-
 ---
