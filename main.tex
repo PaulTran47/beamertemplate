@@ -6,7 +6,7 @@
 %% Colour palette chosen with colour blindness in
 %% mind: https://davidmathlogic.com/colorblind/
 %% Paul L. Tran
-%% Last updated: 06 Oct, 2024.
+%% Last updated: 07 Oct, 2024.
 %=================================================
 
 %=================================================
@@ -38,7 +38,6 @@
 \usetikzlibrary{shapes, arrows, matrix, chains, positioning, decorations.pathreplacing, decorations.pathmorphing, backgrounds, tikzmark}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{hyperref}
-\usepackage{appendixnumberbeamer} 
 \usepackage[
   sorting = ydnt,
   citestyle = authoryear,
@@ -109,6 +108,13 @@
 %% Setting footer style
 % To remove the navigation symbols from the bottom of slides
 \setbeamertemplate{navigation symbols}{} 
+
+%% Storing original definition of \insertframenumber so that when certain
+%% slides have their frame numbers ignored in the count and are hidden, the PDF
+%% metadata isn't affected. Specifically, hiding and not counting certain slides uses:
+%% \begingroup \def\insertframenumber{\texorpdfstring{\relax}{\sidepanenumber}} \endgroup
+\let\sidepanenumber\insertframenumber
+
 %% Customising footer
 \setbeamertemplate{footline}{
   \hbox{
@@ -120,8 +126,9 @@
       \insertshorttitle
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd = 0.333333\paperwidth,ht = 2.25ex,dp = 2ex,right]{footercolor}%
-      \insertframenumber{}
-      % / \inserttotalframenumber %uncomment to add total slides
+      \insertframenumber
+      %% Uncomment the line below if you wish to show the total frame number
+      % / \inserttotalframenumber
       \hspace*{4ex} 
     \end{beamercolorbox}
   }
@@ -257,26 +264,31 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}[noframenumbering]
-    \begin{center}
-      \Huge{\textcolor{basecolor}{Thank you!}}\\
-      \vspace{6mm}
-      \normalsize{
-        \href{mailto:your@email.address}{your@email.address}\\
-        \vspace{3mm}
-        \href{https://google.com/}{https://yourwebsite.com/}
-      }
-    \end{center}
-  \end{frame}
+  %% The frame number of all slides in the following group are considered as empty in
+  %%the actual PDF, but has the original definition in the PDF metadata 
+  \begingroup
+    \def\insertframenumber{\texorpdfstring{\relax}{\sidepanenumber}}
+    \begin{frame}[noframenumbering]
+      \begin{center}
+        \Huge{\textcolor{basecolor}{Thank you!}}\\
+        \vspace{6mm}
+        \normalsize{
+          \href{mailto:your@email.address}{your@email.address}\\
+          \vspace{3mm}
+          \href{https://google.com/}{https://yourwebsite.com/}
+        }
+      \end{center}
+    \end{frame}
 
-  %% Creating references slides
-  %% Making references font size to be tiny
-  \renewcommand*{\bibfont}{\normalfont\tiny}
-  \begin{frame}[t, noframenumbering]{References} % add option allowframebreaks if long reference list
-	\printbibliography
-  \end{frame}
+    %% Creating references slides
+    %% Making references font size to be tiny
+    \renewcommand*{\bibfont}{\normalfont\tiny}
+    \begin{frame}[t, noframenumbering]{References} % add option allowframebreaks if long reference list
+      \printbibliography
+    \end{frame}
 
-  %% Additional slides that are linked
-  \begin{frame}{Appendix \hfill \hyperlink{introduction}{\beamerbutton{Back to Introduction}}}\label{app}
-  \end{frame}
+    %% Additional slides that are linked
+    \begin{frame}[noframenumbering]{Appendix \hfill\hyperlink{introduction}{\beamerbutton{Back to Introduction}}}\label{app}
+    \end{frame}
+  \endgroup
 \end{document}
