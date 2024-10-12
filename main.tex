@@ -166,7 +166,22 @@
 %% Making URL the same font as text, not courier default
 \urlstyle{same}
 \newcommand{\doi}[1]{\url{#1}}
+
 \makeatletter
+%% Setting up footnote to work in the align environment
+\let\original@footnote\footnote
+\newcommand{\align@footnote}[1]{
+  \ifmeasuring@
+    \chardef\@tempfn = \value{footnote}
+    \footnotemark
+    \setcounter{footnote}{\@tempfn}
+  \else
+    \iffirstchoice@
+      \original@footnote{#1}
+    \fi
+  \fi
+}
+\pretocmd{\start@align}{\let\footnote\align@footnote}{}{}
 \makeatother
 %=================================================
 
