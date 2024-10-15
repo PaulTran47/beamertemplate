@@ -161,12 +161,15 @@
 %=================================================
 %% Creating references
 \addbibresource{mybib.bib}
+
 %% Removing document icons from references
 \setbeamertemplate{bibliography item}{}
+
 %% Making URL the same font as text, not courier default
 \urlstyle{same}
 \newcommand{\doi}[1]{\url{#1}}
-%% Changing font of biblatex acronyms into all caps since lmodern doesn't have small caps (e.g., DOI)
+
+%% Changing font of biblatex acronyms into all caps since lmodern doesn't have small caps (e.g., DOI). Default font size is \tiny
 \renewcommand*{\mkbibacro}[1]{#1}
 
 \makeatletter
