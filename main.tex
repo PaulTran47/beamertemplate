@@ -6,7 +6,7 @@
 %% Colour palette chosen with colour blindness in
 %% mind: https://davidmathlogic.com/colorblind/
 %% Paul L. Tran
-%% Last updated: 09 Oct, 2024.
+%% Last updated: 15 Oct, 2024.
 %=================================================
 
 %=================================================
@@ -166,6 +166,8 @@
 %% Making URL the same font as text, not courier default
 \urlstyle{same}
 \newcommand{\doi}[1]{\url{#1}}
+%% Changing font of biblatex acronyms into all caps since lmodern doesn't have small caps (e.g., DOI)
+\renewcommand*{\mkbibacro}[1]{#1}
 
 \makeatletter
 %% Setting up footnote to work in the align environment
