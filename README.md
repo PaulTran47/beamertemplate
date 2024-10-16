@@ -12,6 +12,9 @@ Tran's template for slides in Beamer.
 
 * [Biblatex](https://ctan.org/pkg/biblatex) integration
 
-* Ability and flexibility to both hide and not count certain frame numbers into the total number of frames in the actual PDF output, but simultaneously retain the PDF metadata in order for PDF readers to properly display the true total number of frames
+* Ability and flexibility to both hide and not count certain frame numbers into
+the total number of frames in the actual PDF output, but simultaneously retain
+the PDF metadata in order for PDF readers to properly display the true total
+number of frames
 
 ---
